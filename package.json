@@ -1,4 +1,12 @@
 {
+   "scripts": {
+    "webpack": "webpack",
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
+    "start": "cross-env NODE_ENV=development webpack serve --mode development --open"
+  },
+
   "name": "project-webpack",
   "version": "1.0.0",
   "description": "",
@@ -7,14 +15,7 @@
     "@babel/polyfill": "^7.12.1",
     "normalize.css": "^8.0.1"
   },
-  
-  "scripts": {
-    "webpack": "webpack",
-    "dev": "cross-env NODE_ENV=development webpack --mode development",
-    "build": "cross-env NODE_ENV=production webpack --mode production",
-    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
-    "start": "cross-env NODE_ENV=development webpack serve --mode development --open"
-  },
+ 
 
   "devDependencies": {
   

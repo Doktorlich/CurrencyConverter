@@ -4,68 +4,60 @@ const oneInputNumber = document.querySelector(".one-window");
 const twoInputNumber = document.querySelector(".two-window");
 
 const url = "https://www.cbr-xml-daily.ru/daily_json.js";
+
+let dataObj = [];
+let currRub = {
+    Value: 1,
+};
 const loadFetch = () => {
     fetch(url)
         .then((response) => response.json())
-
         .then((data) => {
-            function nameValute(oneOrTwo) {
+            data.Valute["RUB"] = currRub;
+            function addNameValute(oneOrTwo) {
                 for (const nameValute in data.Valute) {
                     const option = document.createElement("option");
-
+                    option.setAttribute("value", nameValute);
                     option.textContent = nameValute;
-
                     oneOrTwo.append(option);
                 }
             }
-            nameValute(oneBlockValute);
-            nameValute(twoBlockValute);
-            const valute = data.Valute;
-            //events blocks select
-            oneBlockValute.addEventListener("change", () => {
-                twoInputNumber.setAttribute(
-                    "value",
-                    (
-                        (data.Valute[oneBlockValute.value].Value /
-                            data.Valute[twoBlockValute.value].Value) *
-                        oneInputNumber.value
-                    ).toFixed(2)
-                );
-            });
-
-            twoBlockValute.addEventListener("change", () => {
-                twoInputNumber.setAttribute(
-                    "value",
-                    (
-                        (data.Valute[oneBlockValute.value].Value /
-                            data.Valute[twoBlockValute.value].Value) *
-                        oneInputNumber.value
-                    ).toFixed(2)
-                );
-            });
-            //events blocks input
-
-            oneInputNumber.addEventListener("input", () => {
-                twoInputNumber.setAttribute(
-                    "value",
-                    (
-                        (data.Valute[oneBlockValute.value].Value /
-                            data.Valute[twoBlockValute.value].Value) *
-                        oneInputNumber.value
-                    ).toFixed(2)
-                );
-            });
-
-            twoInputNumber.addEventListener("input", () => {
-                oneInputNumber.setAttribute(
-                    "value",
-                    (
-                        (data.Valute[twoBlockValute.value].Value /
-                            data.Valute[oneBlockValute.value].Value) *
-                        twoInputNumber.value
-                    ).toFixed(2)
-                );
-            });
+  
+            addNameValute(oneBlockValute);
+            addNameValute(twoBlockValute);
+            addDataObj(data);
         });
 };
 loadFetch();
+
+function addDataObj(obj) {
+    dataObj.push(obj);
+}
+
+function getValue() {
+    twoInputNumber.setAttribute(
+        "value",
+        (
+            (dataObj[0].Valute[oneBlockValute.value].Value /
+                dataObj[0].Valute[twoBlockValute.value].Value) *
+            oneInputNumber.value
+        ).toFixed(2)
+    );
+}
+//events blocks input
+function checkValue() {
+    twoInputNumber.setAttribute(
+        "value",
+        (
+            (dataObj[0].Valute[oneBlockValute.value].Value /
+                dataObj[0].Valute[twoBlockValute.value].Value) *
+            oneInputNumber.value
+        ).toFixed(2)
+    );
+}
+
+oneBlockValute.addEventListener("change", getValue);
+twoBlockValute.addEventListener("change", getValue);
+oneInputNumber.addEventListener("input", checkValue);
+twoInputNumber.addEventListener("input", checkValue);
+swap.addEventListener("click", currencySwap);
