@@ -18,9 +18,11 @@ const loadFetch = () => {
                 for (const nameValute in data.Valute) {
                     const option = document.createElement("option");
                     option.setAttribute("value", nameValute);
+                   
                     option.textContent = nameValute;
                     oneOrTwo.append(option);
                 }
+                
             }
   
             addNameValute(oneBlockValute);
@@ -60,4 +62,4 @@ oneBlockValute.addEventListener("change", getValue);
 twoBlockValute.addEventListener("change", getValue);
 oneInputNumber.addEventListener("input", checkValue);
 twoInputNumber.addEventListener("input", checkValue);
-swap.addEventListener("click", currencySwap);
+

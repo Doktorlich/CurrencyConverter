@@ -14,7 +14,8 @@ body {
         height: 500px;
 
         .block-value {
-            margin-left: 18px;
+            display: inline;
+            
             text-align: center;
             font-size: 20px;
             font-style: italic;
@@ -25,6 +26,7 @@ body {
 .number-window {
     font-family: "Times New Roman", Times, serif;
     font-size: 20px;
+    width: 150px;
 }
 .one-block {
     padding: 0px;
@@ -32,4 +34,11 @@ body {
 
 .two-block {
     padding: 0px;
+}
+.form-select{
+    width: 100px;
+    height: 35px;
+}
+.block{
+   margin-left: 50px;
 }
